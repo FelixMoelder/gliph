@@ -429,7 +429,8 @@ sub analyzeKmerLog {
       $ove=$discovery_sample_counts[$m]/$average;
     }else{
       # if found 0, assume you just missed it. pseudocount of 1
-      $ove = 1 / ($simdepth * $seqspersim);
+      $average = 1 / ($simdepth * $seqspersim);
+      $ove = $discovery_sample_counts[$m]/$average
       #$ove=">" . $discovery_sample_counts[$m];
     }
     $ove=( int($ove * 1000) / 1000);
