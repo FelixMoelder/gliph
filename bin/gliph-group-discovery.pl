@@ -593,16 +593,14 @@ sub loadtextDB {
 
   my %unique_h3s=(); # monkey
   #addToHash(\%unique_h3s,$lines[$x]);
-  # check if first line is header
-  my @fields=split(/\t/,$lines[0]);
-  unless($fields[0]=~m/CDR3b|cdr3b/i){
-    addToHash(\%unique_h3s,$fields[0]);
+  
+  for(my $x=0;$x<scalar(@lines);$x++){
+    if($lines[$x]=~m/^C[AC-WY][AC-WY][AC-WY][AC-WY]*F/){
+      my @fields=split(/\t/,$lines[$x]);
+      addToHash(\%unique_h3s,$fields[0]);
+    }
   }
-  # add unique sequences
-  for(my $x=1;$x<scalar(@lines);$x++){
-    my @fields=split(/\t/,$lines[$x]);
-    addToHash(\%unique_h3s,$fields[0]);
-  }
+
   return %unique_h3s;
 }
 
